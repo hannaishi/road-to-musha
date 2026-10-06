@@ -1,0 +1,72 @@
+/* ------------------------------
+   投稿一覧：カテゴリーラベル
+------------------------------ */
+.road-to-musha-admin-category-label {
+    display: inline-block;
+    padding: 4px 8px;
+    border-radius: 4px;
+    line-height: 1.4;
+    color: #ffffff;
+}
+
+/* ------------------------------
+   投稿編集：投稿ガイド
+------------------------------ */
+.musha-post-guide {
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+.musha-post-guide > p {
+    margin-top: 0;
+    font-weight: 600;
+}
+
+.musha-post-guide ol {
+    margin: 12px 0 0 20px;
+}
+
+.musha-post-guide li {
+    margin-bottom: 10px;
+}
+
+.musha-post-guide li:last-child {
+    margin-bottom: 0;
+}
+
+.musha-post-guide strong {
+    color: #1d2327;
+}
+/* ------------------------------
+   編集者向けダッシュボードガイド
+------------------------------ */
+.road-to-musha-dashboard-guide {
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+.road-to-musha-dashboard-guide > p:first-child {
+    margin-top: 0;
+    font-weight: 600;
+}
+
+.road-to-musha-dashboard-guide ol {
+    margin: 16px 0 20px 20px;
+}
+
+.road-to-musha-dashboard-guide li {
+    margin-bottom: 12px;
+}
+
+.road-to-musha-dashboard-guide li:last-child {
+    margin-bottom: 0;
+}
+
+.road-to-musha-dashboard-guide strong {
+    color: #1d2327;
+}
+
+.road-to-musha-dashboard-guide .button {
+    margin-right: 8px;
+    margin-bottom: 4px;
+}
