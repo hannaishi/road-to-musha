@@ -13,10 +13,27 @@ function road_to_musha_meta_title($title)
     // 日別アーカイブ
     if (is_day()) {
         return sprintf(
-            '『%d年%d月%d日』の記事一覧 | 武者への道',
+            '%d年%d月%d日の記事一覧 | 武者への道',
             get_query_var('year'),
             get_query_var('monthnum'),
             get_query_var('day')
+        );
+    }
+
+    // 月別アーカイブ
+    if (is_month()) {
+        return sprintf(
+            '%d年%d月の記事一覧 | 武者への道',
+            get_query_var('year'),
+            get_query_var('monthnum')
+        );
+    }
+
+    // 年別アーカイブ
+    if (is_year()) {
+        return sprintf(
+            '%d年の記事一覧 | 武者への道',
+            get_query_var('year')
         );
     }
 
@@ -57,10 +74,27 @@ function road_to_musha_meta_description($description)
     // 日別アーカイブ
     if (is_day()) {
         return sprintf(
-            '『%d年%d月%d日』に更新した記事一覧ページです。',
+            '%d年%d月%d日に更新した記事一覧ページです。',
             get_query_var('year'),
             get_query_var('monthnum'),
             get_query_var('day')
+        );
+    }
+
+    // 月別アーカイブ
+    if (is_month()) {
+        return sprintf(
+            '%d年%d月に更新した記事一覧ページです。',
+            get_query_var('year'),
+            get_query_var('monthnum')
+        );
+    }
+
+    // 年別アーカイブ
+    if (is_year()) {
+        return sprintf(
+            '%d年に更新した記事一覧ページです。',
+            get_query_var('year')
         );
     }
 

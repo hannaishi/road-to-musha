@@ -1,73 +1,7 @@
 <?php
-    /**
- * 著者アーカイブへアクセスした場合はトップページへリダイレクトする。
- */
-    function road_to_musha_redirect_author_archive()
-    {
-    if (is_author()) {
-        wp_safe_redirect(home_url('/'));
-        exit;
-    }
-    }
-    add_action('template_redirect', 'road_to_musha_redirect_author_archive');
 
     /**
- * おすすめ記事を常に1件だけにする
- */
-    function road_to_musha_keep_single_recommend($post_id)
-    {
-    // 投稿以外は対象外
-    if ('post' !== get_post_type($post_id)) {
-        return;
-    }
-
-    // 自動保存時は何もしない
-    if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) {
-        return;
-    }
-
-    // 権限チェック
-    if (! current_user_can('edit_post', $post_id)) {
-        return;
-    }
-
-    // この投稿がおすすめ記事ONでなければ終了
-    $is_recommend = get_field('is_recommend', $post_id);
-
-    if (! $is_recommend) {
-        return;
-    }
-
-    // この投稿以外で、おすすめ記事ONの投稿を取得
-    $recommend_posts = get_posts(
-        [
-            'post_type'      => 'post',
-            'post_status'    => 'any',
-            'posts_per_page' => -1,
-            'post__not_in'   => [$post_id],
-            'meta_query'     => [
-                [
-                    'key'     => 'is_recommend',
-                    'value'   => '1',
-                    'compare' => '=',
-                ],
-            ],
-        ]
-    );
-
-    // 他のおすすめ記事をOFFにする
-    foreach ($recommend_posts as $recommend_post) {
-        update_field(
-            'is_recommend',
-            0,
-            $recommend_post->ID
-        );
-    }
-    }
-    add_action('acf/save_post', 'road_to_musha_keep_single_recommend', 20);
-
-    /**
- * 投稿画面にカテゴリー選択用のメタボックスを追加
+ * 投稿画面にカテゴリー選択用のメタボックスを追加する。
  */
     function road_to_musha_add_category_meta_box()
     {
@@ -83,7 +17,7 @@
     add_action('add_meta_boxes', 'road_to_musha_add_category_meta_box');
 
     /**
- * カテゴリー選択欄を表示
+ * カテゴリー選択欄を表示する。
  */
     function road_to_musha_category_meta_box_callback($post)
     {
@@ -131,7 +65,7 @@
         }
 
         /**
-         * 選択したカテゴリーを保存
+         * 選択したカテゴリーを保存する。
          */
         function road_to_musha_save_category($post_id)
         {
@@ -172,7 +106,7 @@
         add_action('save_post', 'road_to_musha_save_category');
 
         /**
-         * WordPress標準のカテゴリー選択欄を非表示
+         * WordPress標準のカテゴリー選択欄を非表示にする。
          */
         function road_to_musha_hide_default_category_panel()
         {
@@ -186,7 +120,7 @@
         add_action('admin_menu', 'road_to_musha_hide_default_category_panel');
 
         /**
-         * Gutenberg標準のカテゴリー選択パネルを非表示
+         * Gutenberg標準のカテゴリー選択パネルを非表示にする。
          */
         function road_to_musha_hide_gutenberg_category_panel()
         {
@@ -205,12 +139,13 @@
             'enqueue_block_editor_assets',
             'road_to_musha_hide_gutenberg_category_panel'
         );
+
         /**
-         * 使用しない投稿機能を非表示にする
+         * 使用しない投稿機能を非表示にする。
          */
         function road_to_musha_remove_unused_post_supports()
         {
             remove_post_type_support('post', 'comments');
             remove_post_type_support('post', 'trackbacks');
-        }
-        add_action('init', 'road_to_musha_remove_unused_post_supports');
+    }
+    add_action('init', 'road_to_musha_remove_unused_post_supports');
